@@ -6,7 +6,14 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/hotels")
+
+class SHotel(BaseModel):
+    name: str
+    location: str
+    stars: int
+    has_spa: bool
+
+@app.get("/hotels", response_model=list[SHotel])
 def get_hotels(
     location: str,
     date_from: date, 
@@ -14,7 +21,21 @@ def get_hotels(
     stars: Optional[int] = Query(None, ge=1, le=5),
     has_spa: Optional[bool] = None,
 ):
-    return  date_from, date_to
+    hotels = [
+        {
+            "name": "Hotel Sunshine",
+            "location": "Beach City",
+            "stars": 4,
+            "has_spa": True
+        },
+        {
+            "name": "Mountain Retreat",
+            "location": "Hill Town",
+            "stars": 5,
+            "has_spa": False
+        }
+    ]
+    return  hotels
 
 
 class SBooking(BaseModel):
