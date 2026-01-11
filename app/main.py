@@ -2,6 +2,6 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get("/")
-def get_hello():
-    return {"message": "Hello!"}
+@app.get("/hotels/{hotel_id}")
+def get_hotels(hotel_id, int, date_from, date_to):
+    return hotel_id, date_from, date_to
