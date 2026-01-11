@@ -1,7 +1,14 @@
 from fastapi import FastAPI
+from typing import Optional
 
 app = FastAPI()
 
-@app.get("/hotels/{hotel_id}")
-def get_hotels(hotel_id: int, date_from, date_to):
-    return hotel_id, date_from, date_to
+@app.get("/hotels")
+def get_hotels(
+    location,
+    date_from, 
+    date_to,
+    stars: Optional[int] = None,
+    has_spa: Optional[bool] = None,
+):
+    return  date_from, date_to
