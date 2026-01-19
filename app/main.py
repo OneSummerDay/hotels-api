@@ -5,9 +5,11 @@ from datetime import date
 from pydantic import BaseModel
 
 from app.bookings.router import router as bookings_router
+from app.users.router import register_user
 
 app = FastAPI()
 
+app.include_router(register_user)
 app.include_router(bookings_router)
 
 
